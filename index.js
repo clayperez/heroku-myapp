@@ -1,6 +1,7 @@
 // index.js
 // a comment
 var express = require("express");
+var mysql = require("mysql");
 var logfmt = require("logfmt");
 var app = express();
 
