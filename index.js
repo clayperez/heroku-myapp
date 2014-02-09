@@ -8,7 +8,8 @@ var app = express();
 var connection = mysql.createConnection({
   host     : '72.3.204.212',
   user     : '554957_results',
-  password : 'Moresby1$'
+  password : 'Moresby1$',
+  database : '554957_liveresults'
 });
 
 
@@ -17,7 +18,7 @@ app.use(logfmt.requestLogger());
 app.get('/', function(req, res) {
 
 	connection.connect();
-	connection.query('USE 554957_liveresults; SELECT 1 + 1 AS solution', function(err, rows, fields) {
+	connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
 	  if (err) {throw err;}
 	  res.send('Hello World! - '+rows[0].solution);
 	});
