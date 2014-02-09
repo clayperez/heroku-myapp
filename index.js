@@ -11,18 +11,17 @@ var connection = mysql.createConnection({
   password : 'Moresby1$',
   database : '554957_liveresults'
 });
+connection.connect();
 
 
 app.use(logfmt.requestLogger());
 
 app.get('/', function(req, res) {
 
-	connection.connect();
 	connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
 	  if (err) {throw err;}
 	  res.send('Hello World! - '+rows[0].solution);
 	});
-	connection.end();
 
 });
 
