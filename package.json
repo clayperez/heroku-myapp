@@ -1,0 +1,22 @@
+{
+  "name": "myapp",
+  "version": "0.0.1",
+  "description": "My first heroku app using geting-started-with-nodejs on heroku devcenter.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/clayperez/myapp"
+  },
+  "author": "Carlos Perez",
+  "license": "BSD",
+  "engines": {
+    "node": "0.10.x"
+  },
+  "dependencies": {
+    "logfmt": "~0.20.0",
+    "express": "~3.4.8"
+  }
+}
