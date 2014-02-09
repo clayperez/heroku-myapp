@@ -4,6 +4,7 @@ var express = require("express");
 var mysql = require("mysql");
 var logfmt = require("logfmt");
 var app = express();
+var nodedump = require("nodedump").dump;
 
 var connection = mysql.createConnection({
   host     : '72.3.204.212',
@@ -20,7 +21,7 @@ app.get('/', function(req, res) {
 
 	connection.query('SELECT * FROM rhesusCategories', function(err, rows, fields) {
 	  if (err) {throw err;}
-	  res.send("Hello World!<br>Results: %j"+rows);
+	  res.send("Hello World!<br>Results: %j"+nodedump(rows));
 	});
 
 });
