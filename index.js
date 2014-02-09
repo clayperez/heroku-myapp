@@ -21,7 +21,7 @@ app.get('/', function(req, res) {
 
 	connection.query('SELECT * FROM rhesusCategories', function(err, rows, fields) {
 	  if (err) {throw err;}
-	  res.send("Hello World!<br>Results: %j"+nodedump(rows));
+	  res.send("Hello World!<br>Results: %j"+nodedump(rows[0]));
 	});
 
 });
