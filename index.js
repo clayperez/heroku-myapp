@@ -1,4 +1,5 @@
 // index.js
+// a comment
 var express = require("express");
 var logfmt = require("logfmt");
 var app = express();
