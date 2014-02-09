@@ -18,9 +18,9 @@ app.use(logfmt.requestLogger());
 
 app.get('/', function(req, res) {
 
-	connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
+	connection.query('SELECT * FROM rhesusCategories', function(err, rows, fields) {
 	  if (err) {throw err;}
-	  res.send('Hello World! - '+rows[0].solution);
+	  res.send("Hello World!<br>Results: %j"+rows);
 	});
 
 });
