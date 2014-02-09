@@ -18,6 +18,7 @@
   "dependencies": {
     "logfmt": "~0.20.0",
     "express": "~3.4.8",
-    "mysql": "~2.0.1"
+    "mysql": "~2.0.1",
+    "nodedump": "0.0.33"
   }
 }
