@@ -29,7 +29,7 @@ app.get('/', function(req, res) {
 
 	connection.query('SELECT * FROM rhesusCategories', function(err, rows, fields) {
 	  if (err) {throw err;}
-	  res.send( "Hello World!" + nodedump(dbOutput) );
+	  res.send( "Hello World!" + nodedump(process.env) );
 	});
 
 });
