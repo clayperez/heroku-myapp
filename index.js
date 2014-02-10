@@ -15,6 +15,7 @@ var connection = mysql.createConnection({
 });
 connection.connect();
 
+var dbOutput = {value:null};
 var herokuDB_Connect = "mongodb://heroku_app22050986:Moresby1$@ds027779.mongolab.com:27779/heroku_app22050986";
 MongoClient.connect(herokuDB_Connect, function(err, db) {
 	if(err) {console.log(err);return;}
@@ -23,6 +24,7 @@ MongoClient.connect(herokuDB_Connect, function(err, db) {
 	collection.insert({a:2}, function(err, docs) {
 
 		collection.count(function(err, count) {
+			dbOutput = count;
 			console.log(format("count = %s", count));
 		});
 
@@ -41,7 +43,7 @@ app.get('/', function(req, res) {
 
 	connection.query('SELECT * FROM rhesusCategories', function(err, rows, fields) {
 	  if (err) {throw err;}
-	  res.send("<body class='comeon!'><body class='come again?'>Hello World!</body></body><br>Results: %j"+nodedump(rows[0]));
+	  res.send( "Hello World!" + nodedump(dbOutput) );
 	});
 
 });
