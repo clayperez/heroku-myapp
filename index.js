@@ -16,10 +16,10 @@ var connection = mysql.createConnection({
 connection.connect();
 
 
-mongoose.connect("mongodb://heroku_app22050986:Moresby1$@ds027779.mongolab.com:27779/heroku_app22050986");
+mongoose.connect("mongodb://heroku_app22050986:bat78h2b769lmo755bq13tspi3@ds027779.mongolab.com:27779/heroku_app22050986");
 mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
 mongoose.connection.once('open', function callback () {
-  console.log("YES!");
+  console.log("YES!",process.env);
 });
 
 
