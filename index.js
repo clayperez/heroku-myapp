@@ -15,7 +15,7 @@ var connection = mysql.createConnection({
 });
 connection.connect();
 
-var dbOutput = {value:null};
+var dbOutput = {value:new Date()};
 var herokuDB_Connect = "mongodb://heroku_app22050986:Moresby1$@ds027779.mongolab.com:27779/heroku_app22050986";
 MongoClient.connect(herokuDB_Connect, function(err, db) {
 	if(err) {console.log(err);return;}
