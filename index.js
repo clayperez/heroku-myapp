@@ -1,11 +1,11 @@
 // index.js
 // a comment
-var express = require("express");
-var mysql = require("mysql");
-var logfmt = require("logfmt");
-var app = express();
-var nodedump = require("nodedump").dump;
-var mdb = require("mongodb");
+var express = require("express") ,
+	mysql = require("mysql") ,
+	logfmt = require("logfmt") ,
+	app = express() ,
+	nodedump = require("nodedump").dump ,
+	MongoClient = require('mongodb').MongoClient ;
 
 var connection = mysql.createConnection({
   host     : '72.3.204.212',
