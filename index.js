@@ -5,7 +5,7 @@ var express = require("express") ,
 	logfmt = require("logfmt") ,
 	app = express() ,
 	nodedump = require("nodedump").dump ,
-	MongoClient = require('mongodb').MongoClient ;
+	mongoose = require('mongoose') ;
 
 var connection = mysql.createConnection({
   host     : '72.3.204.212',
@@ -15,27 +15,13 @@ var connection = mysql.createConnection({
 });
 connection.connect();
 
-var dbOutput = {value:new Date()};
-var herokuDB_Connect = "mongodb://heroku_app22050986:Moresby1$@ds027779.mongolab.com:27779/heroku_app22050986";
-MongoClient.connect(herokuDB_Connect, function(err, db) {
-	if(err) {console.log(err);return;}
 
-	var collection = db.collection('test_insert');
-	collection.insert({a:2}, function(err, docs) {
+mongoose.connect("mongodb://heroku_app22050986:Moresby1$@ds027779.mongolab.com:27779/heroku_app22050986");
+mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
+mongoose.connection.once('open', function callback () {
+  console.log("YES!");
+});
 
-		collection.count(function(err, count) {
-			dbOutput = count;
-			console.log(format("count = %s", count));
-		});
-
-		// Locate all the entries using find
-		collection.find().toArray(function(err, results) {
-			console.dir(results);
-			// Let's close the db
-			db.close();
-		});
-	});
-})
 
 app.use(logfmt.requestLogger());
 
