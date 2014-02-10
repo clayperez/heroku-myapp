@@ -15,6 +15,25 @@ var connection = mysql.createConnection({
 });
 connection.connect();
 
+var herokuDB_Connect = "mongodb://heroku_app22050986:Moresby1$@ds027779.mongolab.com:27779/heroku_app22050986";
+MongoClient.connect(herokuDB_Connect, function(err, db) {
+	if(err) {console.log(err);return;}
+
+	var collection = db.collection('test_insert');
+	collection.insert({a:2}, function(err, docs) {
+
+		collection.count(function(err, count) {
+			console.log(format("count = %s", count));
+		});
+
+		// Locate all the entries using find
+		collection.find().toArray(function(err, results) {
+			console.dir(results);
+			// Let's close the db
+			db.close();
+		});
+	});
+})
 
 app.use(logfmt.requestLogger());
 
