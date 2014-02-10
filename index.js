@@ -23,8 +23,10 @@ var express = require("express") ,
 		age: { type: Number, min: 0}
 	});
 	var PUser = mongoose.model('PowerUsers', userSchema);
-	var johndoe = new PUser ({ name: { first: 'John', last: '  Doe   ' }, age: 25 });
-	johndoe.save(function (err) {if (err) console.log ('Error on save!')});
+	var newuser = new PUser ({ name: { first: 'John', last: '  Doe   ' }, age: 25 });
+	newuser.save(function (err) {
+		if (err) { console.log ('Error on save!'); }
+	});
 
 ////////////
 // LISTEN //
