@@ -1,39 +1,38 @@
 // index.js
 // a comment
 var express = require("express") ,
-	mysql = require("mysql") ,
 	logfmt = require("logfmt") ,
 	app = express() ,
 	nodedump = require("nodedump").dump ,
 	mongoose = require('mongoose') ;
 
-var connection = mysql.createConnection({
-  host     : '72.3.204.212',
-  user     : '554957_results',
-  password : 'Moresby1$',
-  database : '554957_liveresults'
-});
-connection.connect();
 
-
-mongoose.connect("mongodb://heroku_app22050986:bat78h2b769lmo755bq13tspi3@ds027779.mongolab.com:27779/heroku_app22050986");
-mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
-mongoose.connection.once('open', function callback () {
-  console.log("YES!",process.env);
-});
-
-
-app.use(logfmt.requestLogger());
-
-app.get('/', function(req, res) {
-
-	connection.query('SELECT * FROM rhesusCategories', function(err, rows, fields) {
-	  if (err) {throw err;}
-	  res.send( "Hello World!" + nodedump(process.env) );
+/////////////
+// MONGODB //
+/////////////
+	mongoose.connect( process.env.MONGOLAB_URI , function (err, res) {
+		if (err) {
+			console.log ('ERROR connecting to: ' + uristring + '. ' + err);
+		} else {
+			console.log ('Succeeded connected to: ' + uristring);
+		}
 	});
 
-});
+	var userSchema = new mongoose.Schema({
+		name: { first: String, last: { type: String, trim: true } },
+		age: { type: Number, min: 0}
+	});
+	var PUser = mongoose.model('PowerUsers', userSchema);
+	var johndoe = new PUser ({ name: { first: 'John', last: '  Doe   ' }, age: 25 });
+	johndoe.save(function (err) {if (err) console.log ('Error on save!')});
 
+////////////
+// LISTEN //
+////////////
+app.use(logfmt.requestLogger());
+app.get('/', function(req, res) {
+  res.send( "Hello World!" + nodedump(process.env) );
+});
 var port = Number(process.env.PORT || 5000);
 app.listen(port, function() {
   console.log("Listening on " + port);
