@@ -10,13 +10,15 @@ var express = require("express") ,
 /////////////
 // MONGODB //
 /////////////
-	var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/mydb';
 
+	/////////////////////
+	// DEVELOP / TEST //
+	/////////////////////
+	var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/mydb';
   	mongoose.connect( mongoUri , function (err, res) {
 		if (err) { console.log ('ERROR connecting to: ' + mongoUri + '. ' + err); }
 		else { console.log ('Succeeded connected to: ' + mongoUri); }
 	});
-
 	var userSchema = new mongoose.Schema({
 		name: { first: String, last: { type: String, trim: true } },
 		age: { type: Number, min: 0}
@@ -26,6 +28,10 @@ var express = require("express") ,
 	newuser.save(function (err) {
 		if (err) { console.log ('Error on save!'); }
 	});
+
+	/////////////////
+	// REAL WORLD //
+	/////////////////
 
 ////////////
 // LISTEN //
