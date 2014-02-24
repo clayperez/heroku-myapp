@@ -30,10 +30,11 @@ var express = require("express") ,
 ////////////
 // LISTEN //
 ////////////
+
 	var port = Number(process.env.PORT || 5000);
 	app.use(logfmt.requestLogger());
 	app.get('/', function(req, res) {
-	  res.send( "Hello World!" + nodedump(process.env) );
+	  res.sendfile('index.html');
 	});
 	app.listen(port, function() {
 	  console.log("Listening on " + port);
