@@ -10,12 +10,11 @@ var express = require("express") ,
 /////////////
 // MONGODB //
 /////////////
-	mongoose.connect( process.env.MONGOLAB_URI , function (err, res) {
-		if (err) {
-			console.log ('ERROR connecting to: ' + uristring + '. ' + err);
-		} else {
-			console.log ('Succeeded connected to: ' + uristring);
-		}
+	var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/mydb';
+
+  	mongoose.connect( mongoUri , function (err, res) {
+		if (err) { console.log ('ERROR connecting to: ' + mongoUri + '. ' + err); }
+		else { console.log ('Succeeded connected to: ' + mongoUri); }
 	});
 
 	var userSchema = new mongoose.Schema({
@@ -31,11 +30,11 @@ var express = require("express") ,
 ////////////
 // LISTEN //
 ////////////
-app.use(logfmt.requestLogger());
-app.get('/', function(req, res) {
-  res.send( "Hello World!" + nodedump(process.env) );
-});
-var port = Number(process.env.PORT || 5000);
-app.listen(port, function() {
-  console.log("Listening on " + port);
-});
+	var port = Number(process.env.PORT || 5000);
+	app.use(logfmt.requestLogger());
+	app.get('/', function(req, res) {
+	  res.send( "Hello World!" + nodedump(process.env) );
+	});
+	app.listen(port, function() {
+	  console.log("Listening on " + port);
+	});
