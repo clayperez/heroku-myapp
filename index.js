@@ -34,7 +34,10 @@ var express = require("express") ,
 	var port = Number(process.env.PORT || 5000);
 	app.use(logfmt.requestLogger());
 	app.get('/', function(req, res) {
-	  res.sendfile('index.html');
+		res.sendfile('index.html');
+	});
+	app.get('/app.js', function(req, res) {
+		res.sendfile('app.js');
 	});
 	app.listen(port, function() {
 	  console.log("Listening on " + port);
